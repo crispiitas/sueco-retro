@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>RetroSvenska OS</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Courier+New:wght@400;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        input, textarea {
+            -webkit-user-select: text;
+            user-select: text;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #008080;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            color: #000;
+            overflow: hidden;
+        }
+
+        #desktop {
+            width: 100%;
+            height: calc(100% - 45px);
+            position: relative;
+            padding: 10px;
+            overflow: hidden;
+        }
+
+        .desktop-icon {
+            width: 75px;
+            text-align: center;
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            cursor: pointer;
+            text-shadow: 1px 1px #000;
+        }
+
+        .window {
+            position: absolute;
+            background: #c0c0c0;
+            border-top: 2px solid #fff;
+            border-left: 2px solid #fff;
+            border-right: 2px solid #808080;
+            border-bottom: 2px solid #808080;
+            box-shadow: 1px 1px 0 0 #000;
+            display: none;
+            z-index: 10;
+        }
+
+        .window-inner {
+            padding: 2px;
+        }
+
+        .title-bar {
+            background: linear-gradient(90deg, #000080, #1084d0);
+            color: #fff;
+            padding: 4px 6px;
+            font-weight: bold;
+            font-size: 13px;
+            display: table;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .title-bar-text {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .title-bar-controls {
+            display: table-cell;
+            text-align: right;
+            vertical-align: middle;
+            width: 20px;
+        }
+
+        .title-bar-controls button {
+            background: #c0c0c0;
+            border-top: 1px solid #fff;
+            border-left: 1px solid #fff;
+            border-right: 1px solid #808080;
+            border-bottom: 1px solid #808080;
+            font-weight: bold;
+            font-size: 11px;
+            width: 16px;
+            height: 14px;
+            padding: 0;
+            cursor: pointer;
+            text-align: center;
+            line-height: 11px;
+        }
+
+        .window-body {
+            padding: 10px;
+        }
+
+        .win95-btn {
+            background: #c0c0c0;
+            border-top: 2px solid #fff;
+            border-left: 2px solid #fff;
+            border-right: 2px solid #808080;
+            border-bottom: 2px solid #808080;
+            padding: 6px 12px;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            outline: none;
+            box-shadow: 1px 1px 0 0 #000;
+        }
+
+        .win95-btn:active {
+            border-top: 2px solid #808080;
+            border-left: 2px solid #808080;
+            border-right: 2px solid #fff;
+            border-bottom: 2px solid #fff;
+            padding: 7px 11px 5px 13px;
+        }
+
+        .win95-field {
+            background: #fff;
+            border-top: 2px solid #808080;
+            border-left: 2px solid #808080;
+            border-right: 2px solid #fff;
+            border-bottom: 2px solid #fff;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 13px;
+            padding: 4px;
+            outline: none;
+        }
+
+        #window-disquetera {
+            width: 90%;
+            max-width: 340px;
+            left: 5%;
+            top: 10%;
+        }
+
+        #vocab-input {
+            width: 100%;
+            height: 140px;
+            resize: none;
+        }
+
+        .mode-selector {
+            margin: 10px 0;
+            display: table;
+            width: 100%;
+        }
+        
+        .mode-btn {
+            display: table-cell;
+            text-align: center;
+            width: 33.33%;
+            padding: 2px;
+        }
+        
+        .mode-btn button {
+            width: 100%;
+            font-size: 11px;
+        }
+
+        .mode-btn.active button {
+            background: #e0e0e0;
+            border-top: 2px solid #808080;
+            border-left: 2px solid #808080;
+            border-right: 2px solid #fff;
+            border-bottom: 2px solid #fff;
+            color: #000080;
+        }
+
+        #window-snake {
+            width: 95%;
+            max-width: 350px;
+            left: 2.5%;
+            top: 5%;
+        }
+
+        #game-area {
+            position: relative;
+            background: #000;
+            width: 280px;
+            height: 240px;
+            margin: 0 auto;
+            border: 2px solid #808080;
+        }
+
+        canvas {
+            display: block;
+            background: #112211;
+        }
+
+        #dpad {
+            margin-top: 8px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .dpad-row {
+            display: block;
+            margin: 2px 0;
+        }
+
+        .dpad-btn {
+            width: 48px;
+            height: 40px;
+            font-size: 16px;
+            padding: 0;
+            margin: 0 3px;
+        }
+
+        #window-quiz {
+            width: 88%;
+            max-width: 300px;
+            left: 6%;
+            top: 20%;
+            z-index: 10000;
+            box-shadow: 4px 4px 20px rgba(0,0,0,0.6);
+        }
+
+        .error-icon-box {
+            display: table-cell;
+            vertical-align: top;
+            width: 40px;
+            padding-right: 10px;
+        }
+
+        .quiz-content-box {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        #taskbar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 45px;
+            background: #c0c0c0;
+            border-top: 2px solid #fff;
+            z-index: 999;
+            padding: 4px;
+        }
+
+        #start-button {
+            float: left;
+            font-weight: bold;
+            font-size: 13px;
+            height: 100%;
+            padding: 2px 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        #system-clock {
+            float: right;
+            background: #c0c0c0;
+            border-top: 2px solid #808080;
+            border-left: 2px solid #808080;
+            border-right: 2px solid #fff;
+            border-bottom: 2px solid #fff;
+            height: 100%;
+            padding: 5px 10px;
+            font-size: 12px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="desktop">
+        <!-- Icono Disquetera -->
+        <div class="desktop-icon" onclick="openWindow('disquetera')">
+            <svg width="32" height="32" viewBox="0 0 32 32" style="fill:#000080; display:block; margin:0 auto 5px auto;">
+                <path d="M4 4h20l4 4v20H4V4zm4 2v8h12V6H8zm10 1h3v6h-3V7zM6 26h20V16H6v10zm4-8h12v6H10v-6z" fill="#fff"/>
+                <path d="M2 2h24l6 6v24H2V2zm4 2v24h24V8.8L25.2 4H4zm4 2h14v10H8V6zm2 2v6h10V8H10zm-4 20v-14h20v14H6zm4-12h12v10H10v-10z"/>
+            </svg>
+            Mi Disquetera
+        </div>
+
+        <!-- Icono Snake -->
+        <div class="desktop-icon" onclick="openWindow('snake')">
+            <svg width="32" height="32" viewBox="0 0 32 32" style="fill:#008000; display:block; margin:0 auto 5px auto;">
+                <path d="M2 2h28v28H2V2zm4 4v20h20V6H6zm4 4h4v4h-4v-4zm4 4h4v4h-4v-4zm0 4h4v4h-4v-4zm4 0h4v4h-4v-4zm4 0h4v4h-4v-4z" fill="#22dd22"/>
+            </svg>
+            Snake 95
+        </div>
+
+        <!-- VENTANA: MI DISQUETERA (VOCABULARIO) -->
+        <div id="window-disquetera" class="window">
+            <div class="window-inner">
+                <div class="title-bar">
+                    <div class="title-bar-text">A:\\Vocabulario.txt</div>
+                    <div class="title-bar-controls">
+                        <button onclick="closeWindow('disquetera')">X</button>
+                    </div>
+                </div>
+                <div class="window-body">
+                    <p style="margin: 0 0 6px 0; font-size: 11px; font-weight: bold;">Formato: "español:sueco" (1 por línea)</p>
+                    <textarea id="vocab-input" class="win95-field" placeholder="perro:hund&#10;gato:katt&#10;gracias:tack"></textarea>
+                    
+                    <div class="mode-selector">
+                        <div id="mode-es-sv" class="mode-btn active"><button class="win95-btn" onclick="setMode('es-sv')">ES➔SV</button></div>
+                        <div id="mode-sv-es" class="mode-btn"><button class="win95-btn" onclick="setMode('sv-es')">SV➔ES</button></div>
+                        <div id="mode-mix" class="mode-btn"><button class="win95-btn" onclick="setMode('mix')">MIXTO</button></div>
+                    </div>
+
+                    <button class="win95-btn" style="width:100%; color:#008000;" onclick="saveVocabulary()">💾 Guardar Lista</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- VENTANA: JUEGO SNAKE -->
+        <div id="window-snake" class="window">
+            <div class="window-inner">
+                <div class="title-bar">
+                    <div class="title-bar-text">Snake 95</div>
+                    <div class="title-bar-controls">
+                        <button onclick="closeWindow('snake')">X</button>
+                    </div>
+                </div>
+                <div class="window-body">
+                    <div style="margin-bottom:6px; display:flex; justify-content:space-between; font-weight:bold; font-size:11px;">
+                        <span id="score-display">Puntos: 0</span>
+                        <span id="target-display">Siguiente palabra: 4</span>
+                    </div>
+                    
+                    <div id="game-area">
+                        <canvas id="snakeCanvas" width="280" height="240"></canvas>
+                    </div>
+
+                    <!-- Botonera táctil -->
+                    <div id="dpad">
+                        <div class="dpad-row">
+                            <button class="win95-btn dpad-btn" onclick="changeDirection('UP')">▲</button>
+                        </div>
+                        <div class="dpad-row">
+                            <button class="win95-btn dpad-btn" onclick="changeDirection('LEFT')">◀</button>
+                            <button class="win95-btn dpad-btn" style="background:#b0b0b0; color:blue;" onclick="startGame()">▶</button>
+                            <button class="win95-btn dpad-btn" onclick="changeDirection('RIGHT')">▶</button>
+                        </div>
+                        <div class="dpad-row">
+                            <button class="win95-btn dpad-btn" onclick="changeDirection('DOWN')">▼</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VENTANA EMERGENTE: PREGUNTA AL 100% -->
+        <div id="window-quiz" class="window">
+            <div class="window-inner">
+                <div class="title-bar" style="background: linear-gradient(90deg, #800000, #ff0000);">
+                    <div class="title-bar-text">⚠️ CONTROL DE VOCABULARIO</div>
+                </div>
+                <div class="window-body">
+                    <div style="display:table; width:100%; margin-bottom:10px;">
+                        <div class="error-icon-box"><span style="font-size:24px;">❓</span></div>
+                        <div class="quiz-content-box">
+                            <p style="margin:0; font-size:11px; font-weight:bold;" id="quiz-instruction">Traduce:</p>
+                            <p style="margin:3px 0 0 0; font-size:16px; font-weight:bold; color:#000080;" id="quiz-word">---</p>
+                        </div>
+                    </div>
+                    
+                    <input type="text" id="quiz-answer" class="win95-field" style="width:100%; font-size:15px; margin-bottom:10px; text-align:center;" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Escribe aquí...">
+                    <button class="win95-btn" style="width:100%;" onclick="checkAnswer()">Validar</button>
+                    <p id="quiz-error-msg" style="color:red; font-size:11px; font-weight:bold; text-align:center; margin:5px 0 0 0; display:none;">❌ Incorrecto. ¡Escríbela bien!</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="taskbar">
+        <button id="start-button" class="win95-btn">💻 Inicio</button>
+        <div id="system-clock">00:00</div>
+    </div>
+
+    <script>
+        let vocabulary = [
+            { es: "perro", sv: "hund" },
+            { es: "gato", sv: "katt" },
+            { es: "gracias", sv: "tack" },
+            { es: "hola", sv: "hej" }
+        ];
+        let currentMode = 'es-sv';
+        let currentQuizPair = null;
+        let currentQuizDirection = 'es-sv';
+
+        window.onload = function() {
+            const savedVocab = localStorage.getItem('retro_vocab');
+            const savedMode = localStorage.getItem('retro_mode');
+            if (savedVocab) {
+                document.getElementById('vocab-input').value = savedVocab;
+                parseVocabText(savedVocab);
+            } else {
+                let defaultText = vocabulary.map(item => `${item.es}:${item.sv}`).join('\n');
+                document.getElementById('vocab-input').value = defaultText;
+            }
+            if (savedMode) setMode(savedMode);
+            
+            setInterval(() => {
+                const now = new Date();
+                document.getElementById('system-clock').innerText = now.toTimeString().substring(0,5);
+            }, 1000);
+            
+            openWindow('disquetera');
+        };
+
+        function setMode(mode) {
+            currentMode = mode;
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('mode-' + mode).classList.add('active');
+            localStorage.setItem('retro_mode', mode);
+        }
+
+        function parseVocabText(text) {
+            const lines = text.split('\n');
+            let loaded = [];
+            lines.forEach(line => {
+                const parts = line.split(':');
+                if(parts.length === 2 && parts[0].trim() && parts[1].trim()) {
+                    loaded.push({
+                        es: parts[0].trim().toLowerCase(),
+                        sv: parts[1].trim().toLowerCase()
+                    });
+                }
+            });
+            if(loaded.length > 0) vocabulary = loaded;
+        }
+
+        function saveVocabulary() {
+            const text = document.getElementById('vocab-input').value;
+            parseVocabText(text);
+            localStorage.setItem('retro_vocab', text);
+            alert("💾 ¡Guardado en tu iPhone!");
+        }
+
+        function openWindow(id) {
+            document.getElementById('window-' + id).style.display = 'block';
+            if (id === 'snake') initSnakeGame();
+        }
+
+        function closeWindow(id) {
+            document.getElementById('window-' + id).style.display = 'none';
+            if(id === 'snake') { clearInterval(gameInterval); gameRunning = false; }
+        }
+
+        const canvas = document.getElementById('snakeCanvas');
+        const ctx = canvas.getContext('2d');
+        const gridSize = 10;
+        let snake, direction, food, score, applesEatenForQuiz, gameInterval;
+        let gameRunning = false;
+        let quizActive = false;
+
+        function initSnakeGame() {
+            snake = [{x: 50, y: 50}];
+            direction = 'RIGHT';
+            score = 0;
+            applesEatenForQuiz = 0;
+            updateScoreDisplay();
+            generateFood();
+            drawGame();
+        }
+
+        function startGame() {
+            if(gameRunning || quizActive) return;
+            gameRunning = true;
+            gameInterval = setInterval(updateGame, 140);
+        }
+
+        function generateFood() {
+            food = {
+                x: Math.floor(Math.random() * (canvas.width / gridSize)) * gridSize,
+                y: Math.floor(Math.random() * (canvas.height / gridSize)) * gridSize
+            };
+        }
+
+        function changeDirection(newDir) {
+            if(!gameRunning || quizActive) return;
+            if(newDir === 'UP' && direction !== 'DOWN') direction = 'UP';
+            if(newDir === 'DOWN' && direction !== 'UP') direction = 'DOWN';
+            if(newDir === 'LEFT' && direction !== 'RIGHT') direction = 'LEFT';
+            if(newDir === 'RIGHT' && direction !== 'LEFT') direction = 'RIGHT';
+        }
+
+        function updateGame() {
+            if(quizActive) return;
+            let head = Object.assign({}, snake[0]);
+            if(direction === 'UP') head.y -= gridSize;
+            if(direction === 'DOWN') head.y += gridSize;
+            if(direction === 'LEFT') head.x -= gridSize;
+            if(direction === 'RIGHT') head.x += gridSize;
+
+            if(head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height || collisionSelf(head)) {
+                clearInterval(gameInterval);
+                gameRunning = false;
+                alert("💥 ¡Game Over! Pulsa Play (▶) para reiniciar.");
+                initSnakeGame();
+                return;
+            }
+
+            snake.unshift(head);
+
+            if(head.x === food.x && head.y === food.y) {
+                score++;
+                applesEatenForQuiz++;
+                updateScoreDisplay();
+                generateFood();
+                if(applesEatenForQuiz >= 4) triggerQuiz();
+            } else {
+                snake.pop();
+            }
+            drawGame();
+        }
+
+        function collisionSelf(head) {
+            for(let i = 1; i < snake.length; i++) {
+                if(snake[i].x === head.x && snake[i].y === head.y) return true;
+            }
+            return false;
+        }
+
+        function updateScoreDisplay() {
+            document.getElementById('score-display').innerText = `Puntos: ${score}`;
+            document.getElementById('target-display').innerText = `Siguiente palabra: ${4 - applesEatenForQuiz}`;
+        }
+
+        function drawGame() {
+            ctx.fillStyle = '#112211';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#ff0000';
+            ctx.fillRect(food.x, food.y, gridSize, gridSize);
+            snake.forEach(part => {
+                ctx.fillStyle = '#22dd22';
+                ctx.fillRect(part.x, part.y, gridSize-1, gridSize-1);
+            });
+        }
+
+        function triggerQuiz() {
+            quizActive = true;
+            clearInterval(gameInterval);
+            
+            const randomIndex = Math.floor(Math.random() * vocabulary.length);
+            currentQuizPair = vocabulary[randomIndex];
+
+            if (currentMode === 'es-sv') currentQuizDirection = 'es-sv';
+            else if (currentMode === 'sv-es') currentQuizDirection = 'sv-es';
+            else currentQuizDirection = Math.random() > 0.5 ? 'es-sv' : 'sv-es';
+
+            if (currentQuizDirection === 'es-sv') {
+                document.getElementById('quiz-instruction').innerText = "Traduce al SUECO:";
+                document.getElementById('quiz-word').innerText = currentQuizPair.es.toUpperCase();
+            } else {
+                document.getElementById('quiz-instruction').innerText = "Traduce al ESPAÑOL:";
+                document.getElementById('quiz-word').innerText = currentQuizPair.sv.toUpperCase();
+            }
+
+            document.getElementById('quiz-answer').value = "";
+            document.getElementById('quiz-error-msg').style.display = 'none';
+            document.getElementById('window-quiz').style.display = 'block';
+        }
+
+        function checkAnswer() {
+            const userAnswer = document.getElementById('quiz-answer').value.trim().toLowerCase();
+            let correctAnswer = (currentQuizDirection === 'es-sv') ? currentQuizPair.sv : currentQuizPair.es;
+
+            if (userAnswer === correctAnswer.trim().toLowerCase()) {
+                document.getElementById('window-quiz').style.display = 'none';
+                quizActive = false;
+                applesEatenForQuiz = 0;
+                updateScoreDisplay();
+                gameInterval = setInterval(updateGame, 140);
+            } else {
+                document.getElementById('quiz-error-msg').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
