@@ -151,30 +151,6 @@
         .mobile-row { display: flex; gap: 8px; }
         .mobile-btn-dir { width: 44px; height: 38px; font-size: 18px; padding: 0; display: flex; align-items: center; justify-content: center; }
 
-        /* TECLADO VIRTUAL INTEGRADO */
-        .retro-keyboard {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 4px;
-            margin-top: 10px;
-            background: #ffd1dc;
-            padding: 6px;
-            border: 1px solid #db7093;
-        }
-        .key-btn {
-            padding: 6px 0;
-            font-size: 11px;
-            font-weight: bold;
-            background: #fff;
-            border: 1px solid #db7093;
-            color: #4a0e17;
-            cursor: pointer;
-            text-align: center;
-        }
-        .key-btn:active { background: #ffd1dc; }
-        .key-btn.wide { grid-column: span 2; background: #ffe4e1; }
-        .key-btn.space { grid-column: span 3; }
-
         /* Rejillas Juegos */
         .memory-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; margin: 10px auto; width: 280px; }
         .memory-card { height: 50px; background: #ffd1dc; border: 2px solid #fff; border-right-color: #db7093; border-bottom-color: #db7093; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; text-align: center; cursor: pointer; padding: 2px; word-break: break-word; color: #db7093; }
@@ -282,11 +258,13 @@
                     <p id="hang-clue" style="font-weight:bold; color:#ff69b4; margin:4px 0;">Pista</p>
                     <p id="hang-word" style="font-size:16px; letter-spacing:2px; font-weight:bold; margin:10px 0; color:#444; word-break:break-all;">_ _ _ _</p>
                     <p id="hang-lives" style="color:#db7093; font-weight:bold; margin:4px 0;">Vidas: 6 💕</p>
-                    <div style="margin: 8px 0; display:flex; justify-content:center; gap:5px;">
-                        <div id="hang-current-letter" class="win95-field" style="width:60px; font-size:16px; font-weight:bold; background:#fff; height:32px; display:flex; align-items:center; justify-content:center;">-</div>
+                    
+                    <!-- Campo de texto nativo para usar tu teclado -->
+                    <div style="margin: 12px 0;">
+                        <input type="text" id="hang-native-input" class="win95-field" style="width:140px; font-size:14px; text-align:center; text-transform:uppercase;" maxlength="1" placeholder="Letra">
                         <button class="win95-btn" onclick="playHangLetter()">Probar</button>
                     </div>
-                    <div class="retro-keyboard" id="hang-keyboard"></div>
+
                     <button class="win95-btn" style="color:#ff69b4; width:100%; margin-top:8px;" onclick="initHangman()">🔄 Nueva Palabra</button>
                 </div>
             </div>
@@ -351,15 +329,16 @@
             </div>
         </div>
 
-        <!-- VENTANA INTERRUPCIÓN GLOBAL (CONTROL DE SFI REQUERIDO) -->
+        <!-- VENTANA INTERRUPCIÓN GLOBAL (CONTROL DE SFI - CON TU TECLADO) -->
         <div id="window-quiz" class="window">
             <div class="window-inner">
                 <div class="title-bar" style="background:linear-gradient(90deg, #db7093, #ffb6c1);"><div class="title-bar-text">✨ CONTROL DE SFI REQUERIDO ✨</div></div>
                 <div class="window-body">
                     <p style="margin:0; font-size:11px; font-weight:bold; color:#ff69b4; text-align:center;" id="quiz-instruction">Traduce:</p>
-                    <p style="margin:4px 0 8px 0; font-size:14px; font-weight:bold; color:#4a0e17; text-align:center;" id="quiz-word">---</p>
+                    <p style="margin:4px 0 12px 0; font-size:14px; font-weight:bold; color:#4a0e17; text-align:center;" id="quiz-word">---</p>
                     
-                    <div id="quiz-mock-input" class="win95-field" style="width:100%; min-height:32px; background:#fff; font-size:14px; text-align:center; font-weight:bold; display:flex; align-items:center; justify-content:center; margin-bottom:6px; word-break:break-all;"></div>
+                    <!-- Entrada de texto real para tu propio teclado -->
+                    <input type="text" id="quiz-native-input" class="win95-field" style="width:100%; font-size:14px; text-align:center; font-weight:bold; margin-bottom:10px;" placeholder="Escribe aquí tu respuesta...">
                     
                     <div style="display:grid; grid-template-columns: 1fr 1fr; gap:6px;">
                         <button class="win95-btn" style="background:#fff;" id="quiz-validate-btn" onclick="checkAnswer()">Validar ✨</button>
@@ -372,8 +351,6 @@
                         <p id="quiz-reveal-text" style="color:#4a0e17; font-size:11px; font-weight:bold; margin:0 0 6px 0;"></p>
                         <button class="win95-btn" style="width:100%; color:#ff69b4; display:block;" onclick="skipQuiz()">🌸 Continuar (Saltar Palabra)</button>
                     </div>
-
-                    <div class="retro-keyboard" id="quiz-keyboard"></div>
                 </div>
             </div>
         </div>
@@ -399,28 +376,6 @@
         let onQuizSuccessCallback = null;
         let currentFlashcardIndex = 0;
         let quizAttempts = 0;
-        let quizCurrentString = "";
-
-        const alphabet = "abcdefghijklmnopqrstuvwxyzåäö".split("");
-        
-        function renderKeyboard(containerId, callback) {
-            const container = document.getElementById(containerId);
-            container.innerHTML = "";
-            alphabet.forEach(letter => {
-                let btn = document.createElement('div');
-                btn.className = "key-btn";
-                btn.innerText = letter.toUpperCase();
-                btn.onclick = () => callback(letter);
-                container.appendChild(btn);
-            });
-            if(containerId === 'quiz-keyboard') {
-                let spaceBtn = document.createElement('div');
-                spaceBtn.className = "key-btn space";
-                spaceBtn.innerText = "ESPACIO";
-                spaceBtn.onclick = () => callback(" ");
-                container.appendChild(spaceBtn);
-            }
-        }
 
         window.onload = function() {
             const savedVocab = localStorage.getItem('retro_vocab');
@@ -428,9 +383,6 @@
             if (savedVocab) { parseVocabText(savedVocab); }
             if (savedMode) setMode(savedMode);
             
-            renderKeyboard('hang-keyboard', (l) => { document.getElementById('hang-current-letter').innerText = l.toUpperCase(); });
-            renderKeyboard('quiz-keyboard', (l) => { handleQuizKey(l); });
-
             setInterval(() => {
                 const now = new Date();
                 document.getElementById('system-clock').innerText = "🌸 " + now.toTimeString().substring(0,5);
@@ -495,8 +447,7 @@
         function triggerGlobalQuiz(onSuccess) {
             onQuizSuccessCallback = onSuccess;
             quizAttempts = 0;
-            quizCurrentString = "";
-            document.getElementById('quiz-mock-input').innerText = "";
+            document.getElementById('quiz-native-input').value = "";
 
             const randomIndex = Math.floor(Math.random() * vocabulary.length);
             currentQuizPair = vocabulary[randomIndex];
@@ -516,22 +467,20 @@
             document.getElementById('quiz-error-msg').style.display = 'none';
             document.getElementById('quiz-skip-container').style.display = 'none';
             document.getElementById('window-quiz').style.display = 'block';
-        }
-
-        function handleQuizKey(letter) {
-            quizCurrentString += letter;
-            document.getElementById('quiz-mock-input').innerText = quizCurrentString.toUpperCase();
+            
+            // Foco automático en móviles
+            setTimeout(() => { document.getElementById('quiz-native-input').focus(); }, 150);
         }
 
         function clearQuizInput() {
-            quizCurrentString = quizCurrentString.slice(0, -1);
-            document.getElementById('quiz-mock-input').innerText = quizCurrentString.toUpperCase();
+            document.getElementById('quiz-native-input').value = "";
+            document.getElementById('quiz-native-input').focus();
         }
 
         function cleanString(str) { return str.trim().replace(/\s+/g, ' ').toLowerCase(); }
 
         function checkAnswer() {
-            const userAnswer = cleanString(quizCurrentString);
+            const userAnswer = cleanString(document.getElementById('quiz-native-input').value);
             let correctAnswer = (currentQuizDirection === 'es-sv') ? currentQuizPair.sv : currentQuizPair.es;
             correctAnswer = cleanString(correctAnswer);
 
@@ -591,7 +540,7 @@
             const pair = vocabulary[Math.floor(Math.random() * vocabulary.length)];
             hangTargetWord = pair.sv.toLowerCase().trim(); hangClueWord = pair.es.toUpperCase();
             hangGuessedLetters = []; hangLives = 6; document.getElementById('hang-clue').innerText = `Pista: ${hangClueWord}`; 
-            document.getElementById('hang-current-letter').innerText = "-";
+            document.getElementById('hang-native-input').value = "";
             updateHangDisplay();
         }
         function updateHangDisplay() {
@@ -602,8 +551,9 @@
             if(hangLives <= 0) { alert(`🌸 La palabra era: ${hangTargetWord.toUpperCase()}`); initHangman(); }
         }
         function playHangLetter() {
-            let letterInput = document.getElementById('hang-current-letter').innerText.toLowerCase();
-            if(letterInput === "-") return;
+            let letterInput = document.getElementById('hang-native-input').value.toLowerCase().trim();
+            if(!letterInput) return;
+            document.getElementById('hang-native-input').value = "";
             if(hangGuessedLetters.includes(letterInput)) return;
             hangGuessedLetters.push(letterInput);
             if(!hangTargetWord.includes(letterInput)) { 
