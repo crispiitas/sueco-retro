@@ -24,10 +24,10 @@
             padding: 0;
             width: 100%;
             height: 100%;
-            background-color: #ffb6c1; /* Fondo Rosa Pastel */
+            background-color: #ffb6c1; 
             font-family: 'Courier New', Courier, monospace;
             font-size: 13px;
-            color: #4a0e17; /* Texto retro */
+            color: #4a0e17; 
             overflow: hidden;
         }
 
@@ -41,7 +41,7 @@
             flex-wrap: wrap;
             align-content: flex-start;
             gap: 15px;
-            background-image: radial-gradient(#fff 10%, transparent 10%); /* Puntitos cute */
+            background-image: radial-gradient(#fff 10%, transparent 10%); 
             background-size: 20px 20px;
         }
 
@@ -52,7 +52,7 @@
             font-size: 11px;
             font-weight: bold;
             cursor: pointer;
-            text-shadow: 2px 2px #ff69b4; /* Sombra fucsia */
+            text-shadow: 2px 2px #ff69b4; 
         }
 
         .desktop-icon span.icon-emoji {
@@ -62,22 +62,9 @@
             filter: drop-shadow(1px 1px 0px #fff);
         }
 
-        .shortcut-badge {
-            background: #fff;
-            color: #ff69b4;
-            padding: 1px 5px;
-            font-size: 9px;
-            border-radius: 10px;
-            border: 1px solid #ff69b4;
-            display: inline-block;
-            margin-top: 4px;
-            text-shadow: none;
-            font-weight: bold;
-        }
-
         .window {
             position: absolute;
-            background: #ffe4e1; /* Rosa empolvado */
+            background: #ffe4e1; 
             border-top: 2px solid #fff;
             border-left: 2px solid #fff;
             border-right: 2px solid #db7093;
@@ -92,7 +79,7 @@
         }
 
         .title-bar {
-            background: linear-gradient(90deg, #ff69b4, #ffb6c1); /* Degradado Girly */
+            background: linear-gradient(90deg, #ff69b4, #ffb6c1); 
             color: #fff;
             padding: 5px 8px;
             font-weight: bold;
@@ -118,11 +105,11 @@
             border-right: 2px solid #db7093; border-bottom: 2px solid #db7093;
             padding: 6px 12px; font-family: inherit; font-size: 12px; font-weight: bold;
             cursor: pointer; outline: none; box-shadow: 1px 1px 0 0 #4a0e17; color: #db7093;
+            text-align: center;
         }
         .win95-btn:active {
             border-top: 2px solid #db7093; border-left: 2px solid #db7093;
             border-right: 2px solid #fff; border-bottom: 2px solid #fff;
-            padding: 7px 11px 5px 13px;
         }
 
         .win95-field {
@@ -140,7 +127,7 @@
         #window-buscaminas { width: 94%; max-width: 340px; left: 3%; top: 3%; }
         #window-invaders { width: 94%; max-width: 350px; left: 3%; top: 2%; }
         #window-meteoros { width: 94%; max-width: 340px; left: 3%; top: 4%; }
-        #window-quiz { width: 88%; max-width: 300px; left: 6%; top: 25%; z-index: 10000; box-shadow: 4px 4px 20px rgba(74,14,23,0.5); }
+        #window-quiz { width: 94%; max-width: 340px; left: 3%; top: 12%; z-index: 10000; box-shadow: 4px 4px 20px rgba(74,14,23,0.5); }
 
         #vocab-input { width: 100%; height: 110px; resize: none; }
         .mode-selector { margin: 8px 0; display: table; width: 100%; }
@@ -148,7 +135,7 @@
         .mode-btn button { width: 100%; font-size: 11px; }
         .mode-btn.active button { background: #ffb6c1; border-top: 2px solid #db7093; border-left: 2px solid #db7093; border-right: 2px solid #fff; border-bottom: 2px solid #fff; color: #fff; text-shadow: 1px 1px #db7093; }
 
-        /* Estilos Flashcards */
+        /* Flashcards */
         .flashcard-box { width: 260px; height: 140px; margin: 15px auto; perspective: 1000px; cursor: pointer; }
         .flashcard-inner { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.5s; text-align: center; }
         .flashcard-box.flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -156,20 +143,49 @@
         .flashcard-front { background: #fff; color: #ff69b4; }
         .flashcard-back { background: #fff0f5; color: #db7093; transform: rotateY(180deg); }
 
-        .game-canvas-container { background: #fff0f5; width: 280px; height: 200px; margin: 0 auto; border: 2px solid #db7093; position: relative; }
-        canvas { display: block; background: #fff0f5; }
+        .game-canvas-container { background: #fff0f5; width: 280px; height: 180px; margin: 0 auto; border: 2px solid #db7093; position: relative; }
+        canvas { display: block; background: #fff0f5; width: 100%; height: 100%; }
 
-        /* Rejillas Coquetas */
-        .memory-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 10px auto; width: 280px; }
+        /* Botoneras y D-Pad */
+        .mobile-controls { display: flex; flex-direction: column; align-items: center; gap: 4px; margin-top: 8px; }
+        .mobile-row { display: flex; gap: 8px; }
+        .mobile-btn-dir { width: 44px; height: 38px; font-size: 18px; padding: 0; display: flex; align-items: center; justify-content: center; }
+
+        /* TECLADO VIRTUAL INTEGRADO (Retro) */
+        .retro-keyboard {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            margin-top: 10px;
+            background: #ffd1dc;
+            padding: 6px;
+            border: 1px solid #db7093;
+        }
+        .key-btn {
+            padding: 6px 0;
+            font-size: 11px;
+            font-weight: bold;
+            background: #fff;
+            border: 1px solid #db7093;
+            color: #4a0e17;
+            cursor: pointer;
+            text-align: center;
+        }
+        .key-btn:active { background: #ffd1dc; }
+        .key-btn.wide { grid-column: span 2; background: #ffe4e1; }
+        .key-btn.space { grid-column: span 3; }
+
+        /* Rejillas Juegos */
+        .memory-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; margin: 10px auto; width: 280px; }
         .memory-card { height: 50px; background: #ffd1dc; border: 2px solid #fff; border-right-color: #db7093; border-bottom-color: #db7093; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; text-align: center; cursor: pointer; padding: 2px; word-break: break-word; color: #db7093; }
-        .memory-card.flipped { background: #fff; border: 1px solid #ffaaee; color: #ff69b4; }
+        .memory-card.flipped { background: #fff; border: 1px solid #ffaaee; color: #ff69b4; font-size: 10px; }
         .memory-card.matched { background: #bffff0; border-color:#fff; color: #00b386; visibility: hidden; }
 
         .mines-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; margin: 10px auto; width: 240px; }
         .mines-cell { width: 44px; height: 44px; background: #ffd1dc; border: 2px solid #fff; border-right-color: #db7093; border-bottom-color: #db7093; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: bold; cursor: pointer; }
         .mines-cell.revealed { background: #fff; border: 1px solid #ffd1dc; }
 
-        /* Barra de tareas Cute */
+        /* Barra de tareas */
         #taskbar { position: absolute; bottom: 0; left: 0; width: 100%; height: 45px; background: #ffd1dc; border-top: 2px solid #fff; z-index: 999; padding: 4px; box-shadow: 0 -2px 4px rgba(0,0,0,0.05); }
         #start-button { float: left; font-weight: bold; font-size: 13px; height: 100%; padding: 2px 12px; display: flex; align-items: center; color: #ff69b4; }
         #system-clock { float: right; background: #ffe4e1; border-top: 2px solid #db7093; border-left: 2px solid #db7093; border-right: 2px solid #fff; border-bottom: 2px solid #fff; height: 100%; padding: 5px 12px; font-size: 11px; font-weight: bold; display: flex; align-items: center; color: #db7093; }
@@ -179,45 +195,21 @@
 
     <div id="desktop">
         <!-- ICONOS -->
-        <div class="desktop-icon" onclick="openWindow('disquetera')">
-            <span class="icon-emoji">💾</span>
-            Disquetera<br><span class="shortcut-badge">Teclado: 0</span>
-        </div>
-        <div class="desktop-icon" onclick="openWindow('flashcards')">
-            <span class="icon-emoji">📔</span>
-            Flashcards<br><span class="shortcut-badge">Teclado: 7</span>
-        </div>
-        <div class="desktop-icon" onclick="openWindow('snake')">
-            <span class="icon-emoji">🌸</span>
-            Snake 95<br><span class="shortcut-badge">Teclado: 1</span>
-        </div>
-        <div class="desktop-icon" onclick="openWindow('ahorcado')">
-            <span class="icon-emoji">🎀</span>
-            Ahorcado<br><span class="shortcut-badge">Teclado: 2</span>
-        </div>
-        <div class="desktop-icon" onclick="openWindow('memory')">
-            <span class="icon-emoji">🧸</span>
-            Memory Match<br><span class="shortcut-badge">Teclado: 3</span>
-        </div>
-        <div class="desktop-icon" onclick="openWindow('buscaminas')">
-            <span class="icon-emoji">💖</span>
-            Buscaminas<br><span class="shortcut-badge">Teclado: 4</span>
-        </div>
-        <div class="desktop-icon" onclick="openWindow('invaders')">
-            <span class="icon-emoji">🚀</span>
-            Space Invaders<br><span class="shortcut-badge">Teclado: 5</span>
-        </div>
-        <div class="desktop-icon" onclick="openWindow('meteoros')">
-            <span class="icon-emoji">✨</span>
-            Meteoros<br><span class="shortcut-badge">Teclado: 6</span>
-        </div>
+        <div class="desktop-icon" onclick="openWindow('disquetera')"><span class="icon-emoji">💾</span>Disquetera</div>
+        <div class="desktop-icon" onclick="openWindow('flashcards')"><span class="icon-emoji">📔</span>Flashcards</div>
+        <div class="desktop-icon" onclick="openWindow('snake')"><span class="icon-emoji">🌸</span>Snake 95</div>
+        <div class="desktop-icon" onclick="openWindow('ahorcado')"><span class="icon-emoji">🎀</span>Ahorcado</div>
+        <div class="desktop-icon" onclick="openWindow('memory')"><span class="icon-emoji">🧸</span>Memory Match</div>
+        <div class="desktop-icon" onclick="openWindow('buscaminas')"><span class="icon-emoji">💖</span>Buscaminas</div>
+        <div class="desktop-icon" onclick="openWindow('invaders')"><span class="icon-emoji">🚀</span>Invaders</div>
+        <div class="desktop-icon" onclick="openWindow('meteoros')"><span class="icon-emoji">✨</span>Meteoros</div>
 
         <!-- VENTANA: DISQUETERA -->
         <div id="window-disquetera" class="window">
             <div class="window-inner">
                 <div class="title-bar"><div class="title-bar-text">A:\\Mis_Palabras_SFI.txt</div><div class="title-bar-controls"><button onclick="closeWindow('disquetera')">X</button></div></div>
                 <div class="window-body">
-                    <p style="margin: 0 0 5px 0; font-size: 11px; font-weight: bold; color: #ff69b4;">Formato: "español:sueco" (1 por línea)</p>
+                    <p style="margin: 0 0 5px 0; font-size: 11px; font-weight: bold; color: #ff69b4;">Formato: "español : sueco" (1 por línea)</p>
                     <textarea id="vocab-input" class="win95-field"></textarea>
                     <div class="mode-selector">
                         <div id="mode-es-sv" class="mode-btn active"><button class="win95-btn" onclick="setMode('es-sv')">ES➔SV</button></div>
@@ -232,28 +224,25 @@
         <!-- VENTANA: FLASHCARDS -->
         <div id="window-flashcards" class="window">
             <div class="window-inner">
-                <div class="title-bar"><div class="title-bar-text">📔 Flashcards 95 Estudio</div><div class="title-bar-controls"><button onclick="closeWindow('flashcards')">X</button></div></div>
+                <div class="title-bar"><div class="title-bar-text">📔 Flashcards SFI</div><div class="title-bar-controls"><button onclick="closeWindow('flashcards')">X</button></div></div>
                 <div class="window-body" style="text-align: center;">
                     <p id="flashcard-counter" style="margin:0; font-size:11px; font-weight:bold; color:#db7093;">Tarjeta 1 de 1</p>
-                    
                     <div class="flashcard-box" id="fcard-box" onclick="this.classList.toggle('flipped')">
                         <div class="flashcard-inner">
                             <div class="flashcard-front">
                                 <span style="font-size:11px; color:#db7093; margin-bottom:10px;">¿Cómo se dice? ✨</span>
-                                <strong id="fcard-front-text" style="font-size:18px;">Palabra</strong>
+                                <strong id="fcard-front-text" style="font-size:16px;">Palabra</strong>
                             </div>
                             <div class="flashcard-back">
                                 <span style="font-size:11px; color:#ff69b4; margin-bottom:10px;">Respuesta 🌸</span>
-                                <strong id="fcard-back-text" style="font-size:18px;">Traducción</strong>
+                                <strong id="fcard-back-text" style="font-size:16px;">Traducción</strong>
                             </div>
                         </div>
                     </div>
-
                     <div style="display:flex; justify-content: space-between; gap: 10px;">
                         <button class="win95-btn" style="flex:1;" onclick="prevFlashcard()">◀ Atrás</button>
                         <button class="win95-btn" style="flex:1;" onclick="nextFlashcard()">Siguiente ▶</button>
                     </div>
-                    <p style="font-size:10px; color:#ff69b4; margin: 6px 0 0 0;">✨ Toca la tarjeta para ver el reverso</p>
                 </div>
             </div>
         </div>
@@ -266,8 +255,17 @@
                     <div style="margin-bottom:4px; display:flex; justify-content:space-between; font-weight:bold; font-size:11px; color:#ff69b4;">
                         <span id="score-display">Puntos: 0</span><span id="target-display">Faltan: 4 🍓</span>
                     </div>
-                    <div class="game-canvas-container"><canvas id="snakeCanvas" width="280" height="200"></canvas></div>
-                    <p style="text-align:center; font-size:11px; margin:4px 0; font-weight:bold; color:#db7093;">🎮 Flechas para girar | Enter para empezar</p>
+                    <div class="game-canvas-container"><canvas id="snakeCanvas" width="280" height="180"></canvas></div>
+                    <div style="margin-top:6px; text-align:center;"><button class="win95-btn" onclick="startGame()">▶ Empezar Juego</button></div>
+                    <!-- Controles de Flechas Táctiles Aseguradas -->
+                    <div class="mobile-controls">
+                        <button class="win95-btn mobile-btn-dir" onclick="changeDirection('UP')">▲</button>
+                        <div class="mobile-row">
+                            <button class="win95-btn mobile-btn-dir" onclick="changeDirection('LEFT')">◀</button>
+                            <button class="win95-btn mobile-btn-dir" onclick="changeDirection('RIGHT')">▶</button>
+                        </div>
+                        <button class="win95-btn mobile-btn-dir" onclick="changeDirection('DOWN')">▼</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -275,14 +273,18 @@
         <!-- VENTANA: AHORCADO -->
         <div id="window-ahorcado" class="window">
             <div class="window-inner">
-                <div class="title-bar"><div class="title-bar-text">🎀 Ahorcado Pastel</div><div class="title-bar-controls"><button onclick="closeWindow('ahorcado')">X</button></div></div>
+                <div class="title-bar"><div class="title-bar-text">🎀 Ahorcado SFI</div><div class="title-bar-controls"><button onclick="closeWindow('ahorcado')">X</button></div></div>
                 <div class="window-body" style="text-align:center;">
                     <p id="hang-clue" style="font-weight:bold; color:#ff69b4; margin:4px 0;">Pista</p>
-                    <p id="hang-word" style="font-size:18px; letter-spacing:4px; font-weight:bold; margin:10px 0; color:#444;">_ _ _ _</p>
+                    <p id="hang-word" style="font-size:16px; letter-spacing:2px; font-weight:bold; margin:10px 0; color:#444; word-break:break-all;">_ _ _ _</p>
                     <p id="hang-lives" style="color:#db7093; font-weight:bold; margin:4px 0;">Vidas: 6 💕</p>
-                    <input type="text" id="hang-input" class="win95-field" style="width:40px; text-align:center; font-size:16px;" maxlength="1" autocomplete="off" autocapitalize="off" spellcheck="false">
-                    <button class="win95-btn" onclick="playHangLetter()">Probar</button>
-                    <div style="margin-top:10px;"><button class="win95-btn" style="color:#ff69b4;" onclick="initHangman()">🔄 Nueva Palabra (Enter)</button></div>
+                    <div style="margin: 8px 0; display:flex; justify-content:center; gap:5px;">
+                        <div id="hang-current-letter" class="win95-field" style="width:60px; font-size:16px; font-weight:bold; background:#fff; height:32px; display:flex; align-items:center; justify-content:center;">-</div>
+                        <button class="win95-btn" onclick="playHangLetter()">Probar</button>
+                    </div>
+                    <!-- Teclado virtual adaptado al ahorcado -->
+                    <div class="retro-keyboard" id="hang-keyboard"></div>
+                    <button class="win95-btn" style="color:#ff69b4; width:100%; margin-top:8px;" onclick="initHangman()">🔄 Nueva Palabra</button>
                 </div>
             </div>
         </div>
@@ -301,9 +303,9 @@
         <!-- VENTANA: BUSCAMINAS -->
         <div id="window-buscaminas" class="window">
             <div class="window-inner">
-                <div class="title-bar"><div class="title-bar-text">💖 Buscaminas de Corazones</div><div class="title-bar-controls"><button onclick="closeWindow('buscaminas')">X</button></div></div>
+                <div class="title-bar"><div class="title-bar-text">💖 Buscaminas SFI</div><div class="title-bar-controls"><button onclick="closeWindow('buscaminas')">X</button></div></div>
                 <div class="window-body">
-                    <p style="margin:2px 0 5px 0; text-align:center; font-weight:bold; color:#ff69b4;" id="mines-status">¡Encuentra los corazones ocultos!</p>
+                    <p style="margin:2px 0 5px 0; text-align:center; font-weight:bold; color:#ff69b4;" id="mines-status">¡Toca sobres para buscar corazones!</p>
                     <div class="mines-grid" id="mines-board"></div>
                     <button class="win95-btn" style="width:100%;" onclick="initMinesweeper()">🔄 Limpiar Rejilla</button>
                 </div>
@@ -318,9 +320,13 @@
                     <div style="margin-bottom:4px; display:flex; justify-content:space-between; font-weight:bold; font-size:11px; color:#ff69b4;">
                         <span id="inv-ammo">Láser: 10/10 ✨</span><span id="inv-score">Bajas: 0</span>
                     </div>
-                    <div class="game-canvas-container"><canvas id="invadersCanvas" width="280" height="200"></canvas></div>
-                    <p style="text-align:center; font-size:11px; margin:4px 0; font-weight:bold; color:#db7093;">🎮 Flechas ◀ ▶ para mover | Espacio para disparar</p>
-                    <div style="margin-top:2px; text-align:center;"><button class="win95-btn" onclick="startInvaders()">▶ Conectar Motores (Enter)</button></div>
+                    <div class="game-canvas-container"><canvas id="invadersCanvas" width="280" height="180"></canvas></div>
+                    <div style="margin-top:6px; text-align:center;"><button class="win95-btn" onclick="startInvaders()">▶ Iniciar Partida</button></div>
+                    <div style="display:flex; justify-content:center; gap:12px; margin-top:8px;">
+                        <button class="win95-btn" style="width:50px; height:40px;" onclick="moveInvadersShip(-20)">◀</button>
+                        <button class="win95-btn" style="padding: 0 20px; font-size:14px; background:#fff;" onclick="fireInvadersLaser()">🚀 DISPARAR</button>
+                        <button class="win95-btn" style="width:50px; height:40px;" onclick="moveInvadersShip(20)">▶</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -330,25 +336,43 @@
             <div class="window-inner">
                 <div class="title-bar"><div class="title-bar-text">✨ Estrellas Fugaces</div><div class="title-bar-controls"><button onclick="closeWindow('meteoros')">X</button></div></div>
                 <div class="window-body" style="text-align:center;">
-                    <p style="margin:2px 0; font-weight:bold; font-size:11px; color:#db7093;">Traduce escribiendo en el teclado:</p>
-                    <p id="met-clue" style="font-size:15px; font-weight:bold; color:#ff69b4; margin:4px 0;">ESPAÑOL</p>
-                    <div class="game-canvas-container"><canvas id="meteorosCanvas" width="280" height="140"></canvas></div>
-                    <input type="text" id="met-hidden-input" class="win95-field" style="width:90%; font-size:15px; margin-top:6px; text-align:center;" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Escribe aquí...">
-                    <div style="margin-top:6px;"><button class="win95-btn" onclick="startMeteoros()">▶ Iniciar Radar (Enter)</button></div>
+                    <p id="met-clue" style="font-size:14px; font-weight:bold; color:#ff69b4; margin:4px 0;">ESPAÑOL</p>
+                    <div class="game-canvas-container"><canvas id="meteorosCanvas" width="280" height="110"></canvas></div>
+                    <div style="margin-top:6px; display:flex; justify-content:center; gap:5px; font-size:14px; font-weight:bold;">
+                        <span>Tu letra:</span><div id="met-current-char" class="win95-field" style="width:50px; height:28px; background:#fff; display:flex; align-items:center; justify-content:center;">-</div>
+                        <button class="win95-btn" style="padding:4px 8px;" onclick="startMeteoros()">▶ Iniciar</button>
+                    </div>
+                    <div class="retro-keyboard" id="met-keyboard"></div>
                 </div>
             </div>
         </div>
 
-        <!-- VENTANA INTERRUPCIÓN GLOBAL -->
+        <!-- VENTANA INTERRUPCIÓN GLOBAL (CONTROL DE SFI REQUERIDO) -->
         <div id="window-quiz" class="window">
             <div class="window-inner">
                 <div class="title-bar" style="background:linear-gradient(90deg, #db7093, #ffb6c1);"><div class="title-bar-text">✨ CONTROL DE SFI REQUERIDO ✨</div></div>
                 <div class="window-body">
                     <p style="margin:0; font-size:11px; font-weight:bold; color:#ff69b4; text-align:center;" id="quiz-instruction">Traduce:</p>
-                    <p style="margin:6px 0 10px 0; font-size:16px; font-weight:bold; color:#4a0e17; text-align:center;" id="quiz-word">---</p>
-                    <input type="text" id="quiz-answer" class="win95-field" style="width:100%; font-size:15px; margin-bottom:8px; text-align:center;" autocomplete="off" autocapitalize="off" spellcheck="false">
-                    <button class="win95-btn" style="width:100%; background:#fff;" onclick="checkAnswer()">Validar ✨ (Enter)</button>
-                    <p id="quiz-error-msg" style="color:#db7093; font-size:11px; font-weight:bold; text-align:center; margin:6px 0 0 0; display:none;">❌ Inténtalo de nuevo, ¡tú puedes!</p>
+                    <p style="margin:4px 0 8px 0; font-size:14px; font-weight:bold; color:#4a0e17; text-align:center;" id="quiz-word">---</p>
+                    
+                    <!-- Cuadro de texto simulado de respuesta -->
+                    <div id="quiz-mock-input" class="win95-field" style="width:100%; min-height:32px; background:#fff; font-size:14px; text-align:center; font-weight:bold; display:flex; align-items:center; justify-content:center; margin-bottom:6px; word-break:break-all;"></div>
+                    
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:6px;">
+                        <button class="win95-btn" style="background:#fff;" id="quiz-validate-btn" onclick="checkAnswer()">Validar ✨</button>
+                        <button class="win95-btn" style="background:#ffe4e1; color:#ff69b4;" onclick="clearQuizInput()">Borrar ⌫</button>
+                    </div>
+
+                    <p id="quiz-error-msg" style="color:#db7093; font-size:11px; font-weight:bold; text-align:center; margin:6px 0 0 0; display:none;">❌ ¡Inténtalo de nuevo, tú puedes!</p>
+                    
+                    <!-- LÓGICA DE ESCAPE FÍSICA Y VISIBLE TRAS LOS 3 INTENTOS -->
+                    <div id="quiz-skip-container" style="margin-top:10px; display:none; text-align:center; background:#fff; padding:6px; border:1px dashed #db7093;">
+                        <p id="quiz-reveal-text" style="color:#4a0e17; font-size:11px; font-weight:bold; margin:0 0 6px 0;"></p>
+                        <button class="win95-btn" style="width:100%; color:#ff69b4; display:block;" onclick="skipQuiz()">🌸 Continuar (Saltar Palabra)</button>
+                    </div>
+
+                    <!-- Teclado virtual completo para la ventana de Control de SFI -->
+                    <div class="retro-keyboard" id="quiz-keyboard"></div>
                 </div>
             </div>
         </div>
@@ -356,81 +380,65 @@
 
     <div id="taskbar">
         <button id="start-button" class="win95-btn">🎀 Inicio</button>
-        <div id="system-clock">00:00</div>
+        <div id="system-clock">🌸 00:00</div>
     </div>
 
     <script>
-        // --- BASE DE DATOS Y CONFIGURACIÓN ---
+        // Listado definitivo SFI C y D
         let vocabulary = [
-            { es: "perro", sv: "hund" }, { es: "gato", sv: "katt" },
-            { es: "gracias", sv: "tack" }, { es: "hola", sv: "hej" }
+            { es: "una casa", sv: "ett hus" }, { es: "un trabajo", sv: "ett jobb" }, { es: "un jefe", sv: "en chef" },
+            { es: "una oportunidad", sv: "en generic" }, { es: "un contrato", sv: "ett kontrakt" }, { es: "la solicitud", sv: "en ansökan" },
+            { es: "un apartamento", sv: "en lägenhet" }, { es: "un alquiler", sv: "en hyra" }, { es: "una sociedad", sv: "ett samhälle" },
+            { es: "un ciudadano", sv: "en medborgare" }, { es: "una experiencia", sv: "en erfarenhet" }, { es: "un impuesto", sv: "en skatt" },
+            { es: "una educación", sv: "en utbildning" }, { es: "un salario", sv: "en lön" }, { es: "un colega", sv: "en kollega" },
+            { es: "una reunión", sv: "ett möte" }, { es: "un permiso", sv: "ett tillstånd" }, { es: "un futuro", sv: "en framtid" },
+            { es: "un idioma", sv: "ett språk" }, { es: "una norma", sv: "en regel" }, { es: "un ingreso", sv: "en inkomst" },
+            { es: "un presupuesto", sv: "en budget" }, { es: "una factura", sv: "en faktura" }, { es: "un seguro", sv: "en försäkring" },
+            { es: "un sindicato", sv: "ett fackförbund" }
         ];
+
         let currentMode = 'es-sv';
         let currentQuizPair = null;
         let currentQuizDirection = 'es-sv';
         let onQuizSuccessCallback = null;
         let currentFlashcardIndex = 0;
+        let quizAttempts = 0;
+        let quizCurrentString = "";
 
-        // --- RECEPTOR GLOBAL DE TECLADO ---
-        window.addEventListener('keydown', function(e) {
-            if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') {
-                if (e.key === 'Enter') {
-                    if (document.getElementById('window-quiz').style.display === 'block') { checkAnswer(); }
-                    else if (document.getElementById('window-ahorcado').style.display === 'block') { playHangLetter(); }
-                }
-                return;
+        // Generar teclados táctiles
+        const alphabet = "abcdefghijklmnopqrstuvwxyzåäö".split("");
+        
+        function renderKeyboard(containerId, callback) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = "";
+            alphabet.forEach(letter => {
+                let btn = document.createElement('div');
+                btn.className = "key-btn";
+                btn.innerText = letter.toUpperCase();
+                btn.onclick = () => callback(letter);
+                container.appendChild(btn);
+            });
+            // Teclas adicionales espaciales útiles para escribir en/ett
+            if(containerId === 'quiz-keyboard') {
+                let spaceBtn = document.createElement('div');
+                spaceBtn.className = "key-btn space";
+                spaceBtn.innerText = "ESPACIO";
+                spaceBtn.onclick = () => callback(" ");
+                container.appendChild(spaceBtn);
             }
-
-            if (e.key === '0') toggleWindowKeyboard('disquetera');
-            if (e.key === '1') toggleWindowKeyboard('snake');
-            if (e.key === '2') toggleWindowKeyboard('ahorcado');
-            if (e.key === '3') toggleWindowKeyboard('memory');
-            if (e.key === '4') toggleWindowKeyboard('buscaminas');
-            if (e.key === '5') toggleWindowKeyboard('invaders');
-            if (e.key === '6') toggleWindowKeyboard('meteoros');
-            if (e.key === '7') toggleWindowKeyboard('flashcards');
-
-            if (e.key === 'Enter') {
-                if (document.getElementById('window-snake').style.display === 'block') startGame();
-                if (document.getElementById('window-invaders').style.display === 'block') startInvaders();
-                if (document.getElementById('window-meteoros').style.display === 'block') startMeteoros();
-            }
-
-            if (document.getElementById('window-snake').style.display === 'block') {
-                if (e.key === 'ArrowUp') changeDirection('UP');
-                if (e.key === 'ArrowDown') changeDirection('DOWN');
-                if (e.key === 'ArrowLeft') changeDirection('LEFT');
-                if (e.key === 'ArrowRight') changeDirection('RIGHT');
-            }
-            if (document.getElementById('window-invaders').style.display === 'block') {
-                if (e.key === 'ArrowLeft') moveInvadersShip(-15);
-                if (e.key === 'ArrowRight') moveInvadersShip(15);
-                if (e.key === ' ') { e.preventDefault(); fireInvadersLaser(); }
-            }
-            if (document.getElementById('window-flashcards').style.display === 'block') {
-                if (e.key === 'ArrowRight') nextFlashcard();
-                if (e.key === 'ArrowLeft') prevFlashcard();
-                if (e.key === ' ') { e.preventDefault(); document.getElementById('fcard-box').classList.toggle('flipped'); }
-            }
-        });
-
-        function toggleWindowKeyboard(id) {
-            let win = document.getElementById('window-' + id);
-            if (win.style.display === 'block') { closeWindow(id); }
-            else { openWindow(id); }
         }
 
         window.onload = function() {
             const savedVocab = localStorage.getItem('retro_vocab');
             const savedMode = localStorage.getItem('retro_mode');
-            if (savedVocab) {
-                document.getElementById('vocab-input').value = savedVocab;
-                parseVocabText(savedVocab);
-            } else {
-                let defaultText = vocabulary.map(item => `${item.es}:${item.sv}`).join('\n');
-                document.getElementById('vocab-input').value = defaultText;
-            }
+            if (savedVocab) { parseVocabText(savedVocab); }
             if (savedMode) setMode(savedMode);
+            
+            // Renderizar todos los teclados virtuales fijos
+            renderKeyboard('hang-keyboard', (l) => { document.getElementById('hang-current-letter').innerText = l.toUpperCase(); });
+            renderKeyboard('met-keyboard', (l) => { handleMeteorKey(l); });
+            renderKeyboard('quiz-keyboard', (l) => { handleQuizKey(l); });
+
             setInterval(() => {
                 const now = new Date();
                 document.getElementById('system-clock').innerText = "🌸 " + now.toTimeString().substring(0,5);
@@ -438,40 +446,26 @@
             openWindow('disquetera');
         };
 
-        function setMode(mode) {
-            currentMode = mode;
-            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
-            document.getElementById('mode-' + mode).classList.add('active');
-            localStorage.setItem('retro_mode', mode);
-            if(document.getElementById('window-flashcards').style.display === 'block') updateFlashcard();
-        }
-
         function parseVocabText(text) {
-            const lines = text.split('\n');
-            let loaded = [];
+            const lines = text.split('\n'); let loaded = [];
             lines.forEach(line => {
                 const parts = line.split(':');
                 if(parts.length === 2 && parts[0].trim() && parts[1].trim()) {
                     loaded.push({ es: parts[0].trim().toLowerCase(), sv: parts[1].trim().toLowerCase() });
                 }
             });
-            if(loaded.length > 0) {
-                vocabulary = loaded;
-                currentFlashcardIndex = 0;
-            }
+            if(loaded.length > 0) vocabulary = loaded;
         }
 
-        function saveVocabulary() {
-            const text = document.getElementById('vocab-input').value;
-            parseVocabText(text);
-            localStorage.setItem('retro_vocab', text);
-            alert("💖 ¡Lista de vocabulario actualizada!");
+        function setMode(mode) {
+            currentMode = mode;
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('mode-' + mode).classList.add('active');
+            if(document.getElementById('window-flashcards').style.display === 'block') updateFlashcard();
         }
 
         function openWindow(id) {
-            if(id !== 'quiz') {
-                document.querySelectorAll('.window').forEach(w => { if(w.id !== 'window-quiz') w.style.display = 'none'; });
-            }
+            if(id !== 'quiz') document.querySelectorAll('.window').forEach(w => { if(w.id !== 'window-quiz') w.style.display = 'none'; });
             document.getElementById('window-' + id).style.display = 'block';
             if (id === 'flashcards') updateFlashcard();
             if (id === 'snake') initSnakeGame();
@@ -489,15 +483,12 @@
             if(id === 'meteoros') { clearInterval(metInterval); metRunning = false; }
         }
 
-        // --- SISTEMA DE FLASHCARDS ---
+        // --- FLASHCARDS ---
         function updateFlashcard() {
             if(vocabulary.length === 0) return;
             document.getElementById('fcard-box').classList.remove('flipped');
             document.getElementById('flashcard-counter').innerText = `Tarjeta ${currentFlashcardIndex + 1} de ${vocabulary.length}`;
-            
             let pair = vocabulary[currentFlashcardIndex];
-            
-            // Ajustar según la dirección configurada en la disquetera
             if (currentMode === 'sv-es') {
                 document.getElementById('fcard-front-text').innerText = pair.sv.toUpperCase();
                 document.getElementById('fcard-back-text').innerText = pair.es.toLowerCase();
@@ -506,21 +497,16 @@
                 document.getElementById('fcard-back-text').innerText = pair.sv.toLowerCase();
             }
         }
+        function nextFlashcard() { currentFlashcardIndex = (currentFlashcardIndex + 1) % vocabulary.length; updateFlashcard(); }
+        function prevFlashcard() { currentFlashcardIndex = (currentFlashcardIndex - 1 + vocabulary.length) % vocabulary.length; updateFlashcard(); }
 
-        function nextFlashcard() {
-            if(vocabulary.length === 0) return;
-            currentFlashcardIndex = (currentFlashcardIndex + 1) % vocabulary.length;
-            updateFlashcard();
-        }
-
-        function prevFlashcard() {
-            if(vocabulary.length === 0) return;
-            currentFlashcardIndex = (currentFlashcardIndex - 1 + vocabulary.length) % vocabulary.length;
-            updateFlashcard();
-        }
-
+        // --- CONTROL GLOBAL DE SFI (MECÁNICA DE 3 INTENTOS ASEGURADA) ---
         function triggerGlobalQuiz(onSuccess) {
             onQuizSuccessCallback = onSuccess;
+            quizAttempts = 0;
+            quizCurrentString = "";
+            document.getElementById('quiz-mock-input').innerText = "";
+
             const randomIndex = Math.floor(Math.random() * vocabulary.length);
             currentQuizPair = vocabulary[randomIndex];
 
@@ -529,39 +515,64 @@
             else currentQuizDirection = Math.random() > 0.5 ? 'es-sv' : 'sv-es';
 
             if (currentQuizDirection === 'es-sv') {
-                document.getElementById('quiz-instruction').innerText = "✨ Traduce al SUECO:";
+                document.getElementById('quiz-instruction').innerText = "✨ Traduce al SUECO (escribe en/ett):";
                 document.getElementById('quiz-word').innerText = currentQuizPair.es.toUpperCase();
             } else {
                 document.getElementById('quiz-instruction').innerText = "✨ Traduce al ESPAÑOL:";
                 document.getElementById('quiz-word').innerText = currentQuizPair.sv.toUpperCase();
             }
 
-            document.getElementById('quiz-answer').value = "";
             document.getElementById('quiz-error-msg').style.display = 'none';
+            document.getElementById('quiz-skip-container').style.display = 'none';
             document.getElementById('window-quiz').style.display = 'block';
-            setTimeout(() => document.getElementById('quiz-answer').focus(), 50);
         }
 
-        function checkAnswer() {
-            const userAnswer = document.getElementById('quiz-answer').value.trim().toLowerCase();
-            let correctAnswer = (currentQuizDirection === 'es-sv') ? currentQuizPair.sv : currentQuizPair.es;
+        function handleQuizKey(letter) {
+            quizCurrentString += letter;
+            document.getElementById('quiz-mock-input').innerText = quizCurrentString.toUpperCase();
+        }
 
-            if (userAnswer === correctAnswer.trim().toLowerCase()) {
+        function clearQuizInput() {
+            quizCurrentString = quizCurrentString.slice(0, -1);
+            document.getElementById('quiz-mock-input').innerText = quizCurrentString.toUpperCase();
+        }
+
+        function cleanString(str) { return str.trim().replace(/\s+/g, ' ').toLowerCase(); }
+
+        function checkAnswer() {
+            const userAnswer = cleanString(quizCurrentString);
+            let correctAnswer = (currentQuizDirection === 'es-sv') ? currentQuizPair.sv : currentQuizPair.es;
+            correctAnswer = cleanString(correctAnswer);
+
+            if (userAnswer === correctAnswer) {
                 document.getElementById('window-quiz').style.display = 'none';
                 if (onQuizSuccessCallback) onQuizSuccessCallback();
             } else {
+                quizAttempts++;
                 document.getElementById('quiz-error-msg').style.display = 'block';
+                
+                // Si alcanza 3 fallos o más, forzar la aparición del botón de salto
+                if (quizAttempts >= 3) {
+                    let targetText = (currentQuizDirection === 'es-sv') ? currentQuizPair.sv : currentQuizPair.es;
+                    document.getElementById('quiz-reveal-text').innerText = `💡 Solución: "${targetText.toUpperCase()}"`;
+                    document.getElementById('quiz-skip-container').style.display = 'block';
+                }
             }
         }
 
-        // --- JUEGO 1: SNAKE 95 ---
+        function skipQuiz() {
+            // Cierre definitivo y limpio de la ventana sin bucles
+            document.getElementById('window-quiz').style.display = 'none';
+            if (onQuizSuccessCallback) onQuizSuccessCallback();
+        }
+
+        // --- SNAKE ---
         const canvas = document.getElementById('snakeCanvas'); const ctx = canvas.getContext('2d');
         let snake, direction, food, score, applesEatenForQuiz, gameInterval, gameRunning = false;
         function initSnakeGame() { snake = [{x: 50, y: 50}]; direction = 'RIGHT'; score = 0; applesEatenForQuiz = 0; updateScoreDisplay(); generateFood(); drawGame(); }
-        function startGame() { if(gameRunning) return; gameRunning = true; gameInterval = setInterval(updateGame, 140); }
-        function generateFood() { food = { x: Math.floor(Math.random() * 28) * 10, y: Math.floor(Math.random() * 20) * 10 }; }
+        function startGame() { if(gameRunning) return; gameRunning = true; gameInterval = setInterval(updateGame, 160); }
+        function generateFood() { food = { x: Math.floor(Math.random() * 28) * 10, y: Math.floor(Math.random() * 18) * 10 }; }
         function changeDirection(newDir) {
-            if(!gameRunning) return;
             if(newDir === 'UP' && direction !== 'DOWN') direction = 'UP'; if(newDir === 'DOWN' && direction !== 'UP') direction = 'DOWN';
             if(newDir === 'LEFT' && direction !== 'RIGHT') direction = 'LEFT'; if(newDir === 'RIGHT' && direction !== 'LEFT') direction = 'RIGHT';
         }
@@ -569,14 +580,14 @@
             let head = Object.assign({}, snake[0]);
             if(direction === 'UP') head.y -= 10; if(direction === 'DOWN') head.y += 10; if(direction === 'LEFT') head.x -= 10; if(direction === 'RIGHT') head.x += 10;
             if(head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height || collisionSelf(head)) {
-                clearInterval(gameInterval); gameRunning = false; alert("🌸 Fin de la partida. ¡Buen intento!"); initSnakeGame(); return;
+                clearInterval(gameInterval); gameRunning = false; alert("🌸 ¡Partida terminada!"); initSnakeGame(); return;
             }
             snake.unshift(head);
             if(head.x === food.x && head.y === food.y) {
                 score++; applesEatenForQuiz++; updateScoreDisplay(); generateFood();
                 if(applesEatenForQuiz >= 4) {
                     clearInterval(gameInterval); gameRunning = false;
-                    triggerGlobalQuiz(() => { gameRunning = true; applesEatenForQuiz = 0; updateScoreDisplay(); gameInterval = setInterval(updateGame, 140); });
+                    triggerGlobalQuiz(() => { gameRunning = true; applesEatenForQuiz = 0; updateScoreDisplay(); gameInterval = setInterval(updateGame, 160); });
                 }
             } else { snake.pop(); }
             drawGame();
@@ -585,31 +596,37 @@
         function updateScoreDisplay() { document.getElementById('score-display').innerText = `Puntos: ${score}`; document.getElementById('target-display').innerText = `Faltan: ${4 - applesEatenForQuiz} 🍓`; }
         function drawGame() { ctx.fillStyle = '#fff0f5'; ctx.fillRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = '#ff1493'; ctx.fillRect(food.x, food.y, 10, 10); ctx.fillStyle = '#ff69b4'; snake.forEach(part => ctx.fillRect(part.x, part.y, 9, 9)); }
 
-        // --- JUEGO 2: AHORCADO ---
+        // --- AHORCADO ---
         let hangTargetWord = "", hangClueWord = "", hangGuessedLetters = [], hangLives = 6;
         function initHangman() {
+            if(vocabulary.length === 0) return;
             const pair = vocabulary[Math.floor(Math.random() * vocabulary.length)];
-            hangTargetWord = pair.sv.toLowerCase(); hangClueWord = pair.es.toUpperCase();
-            hangGuessedLetters = []; hangLives = 6; document.getElementById('hang-clue').innerText = `Pista: ${hangClueWord}`; updateHangDisplay();
-            setTimeout(() => document.getElementById('hang-input').focus(), 50);
+            hangTargetWord = pair.sv.toLowerCase().trim(); hangClueWord = pair.es.toUpperCase();
+            hangGuessedLetters = []; hangLives = 6; document.getElementById('hang-clue').innerText = `Pista: ${hangClueWord}`; 
+            document.getElementById('hang-current-letter').innerText = "-";
+            updateHangDisplay();
         }
         function updateHangDisplay() {
             let display = "";
             for(let char of hangTargetWord) { display += (hangGuessedLetters.includes(char) || char === " ") ? char + " " : "_ "; }
             document.getElementById('hang-word').innerText = display; document.getElementById('hang-lives').innerText = `Vidas: ${hangLives} 💕`;
-            if(!display.includes("_")) { alert("🎉 ¡Felicidades! ¡Acertaste!"); initHangman(); }
-            if(hangLives <= 0) { alert(`🌸 Oh, la respuesta era: ${hangTargetWord}`); initHangman(); }
+            if(!display.includes("_")) { alert("🎉 ¡Felicidades, ganaste!"); initHangman(); }
+            if(hangLives <= 0) { alert(`🌸 La palabra era: ${hangTargetWord.toUpperCase()}`); initHangman(); }
         }
         function playHangLetter() {
-            let letterInput = document.getElementById('hang-input').value.trim().toLowerCase(); document.getElementById('hang-input').value = "";
-            if(!letterInput || hangGuessedLetters.includes(letterInput)) return;
+            let letterInput = document.getElementById('hang-current-letter').innerText.toLowerCase();
+            if(letterInput === "-") return;
+            if(hangGuessedLetters.includes(letterInput)) return;
             hangGuessedLetters.push(letterInput);
-            if(!hangTargetWord.includes(letterInput)) { hangLives--; triggerGlobalQuiz(() => { updateHangDisplay(); }); return; }
+            if(!hangTargetWord.includes(letterInput)) { 
+                hangLives--; 
+                triggerGlobalQuiz(() => { updateHangDisplay(); }); 
+                return; 
+            }
             updateHangDisplay();
-            setTimeout(() => document.getElementById('hang-input').focus(), 50);
         }
 
-        // --- JUEGO 3: MEMORY MATCH ---
+        // --- MEMORY MATCH ---
         let memSelectedCards = [];
         function initMemory() {
             const grid = document.getElementById('mem-grid'); grid.innerHTML = ""; memSelectedCards = [];
@@ -624,43 +641,40 @@
                         if(memSelectedCards[0].dataset.pairId === memSelectedCards[1].dataset.pairId) { memSelectedCards[0].classList.add('matched'); memSelectedCards[1].classList.add('matched'); }
                         else { memSelectedCards.forEach(c => { c.classList.remove('flipped'); c.innerText = "🌸"; }); }
                         memSelectedCards = [];
-                    }, 800);
+                    }, 1000);
                 };
                 grid.appendChild(card);
             });
         }
 
-        // --- JUEGO 4: BUSCAMINAS ---
+        // --- BUSCAMINAS ---
         function initMinesweeper() {
-            const board = document.getElementById('mines-board'); board.innerHTML = ""; document.getElementById('mines-status').innerText = "Busca los corazones ocultos";
+            const board = document.getElementById('mines-board'); board.innerHTML = ""; document.getElementById('mines-status').innerText = "Toca sobres para buscar corazones";
             for(let i=0; i<15; i++) {
                 let cell = document.createElement('div'); cell.className = "mines-cell"; cell.innerText = "✉️"; let isBomb = Math.random() < 0.25;
                 cell.onclick = () => {
                     if(cell.classList.contains('revealed')) return; cell.classList.add('revealed');
-                    if(isBomb) { cell.innerText = "💔"; triggerGlobalQuiz(() => { cell.innerText = "💖"; document.getElementById('mines-status').innerText = "¡Corazón arreglado!"; }); }
+                    if(isBomb) { cell.innerText = "💔"; triggerGlobalQuiz(() => { cell.innerText = "💖"; document.getElementById('mines-status').innerText = "¡Arreglado!"; }); }
                     else cell.innerText = "✨";
                 };
                 board.appendChild(cell);
             }
         }
 
-        // --- JUEGO 5: SPACE INVADERS ---
+        // --- SPACE INVADERS ---
         const invCanvas = document.getElementById('invadersCanvas'); const invCtx = invCanvas.getContext('2d');
         let invShipX, invAliens, invLaser, invAmmo, invScoreCount, invInterval, invRunning = false;
-        function initInvaders() {
-            invShipX = 130; invLaser = null; invAmmo = 10; invScoreCount = 0; invAliens = [];
-            for(let i=0; i<5; i++) { invAliens.push({x: 20 + i*50, y: 30, alive: true}); }
-            updateInvadersUI(); drawInvaders();
-        }
-        function startInvaders() { if(invRunning) return; invRunning = true; invInterval = setInterval(updateInvaders, 100); }
-        function moveInvadersShip(dir) { invShipX = Math.max(10, Math.min(250, invShipX + dir)); drawInvaders(); }
+        function initInvaders() { invShipX = 130; invLaser = null; invAmmo = 10; invScoreCount = 0; invAliens = []; for(let i=0; i<5; i++) { invAliens.push({x: 20 + i*55, y: 30, alive: true}); } updateInvadersUI(); drawInvaders(); }
+        function startInvaders() { if(invRunning) return; invRunning = true; invInterval = setInterval(updateInvaders, 110); }
+        function moveInvadersShip(dir) { invShipX = Math.max(10, Math.min(245, invShipX + dir)); drawInvaders(); }
         function updateInvadersUI() { document.getElementById('inv-ammo').innerText = `Láser: ${invAmmo}/10 ✨`; document.getElementById('inv-score').innerText = `Bajas: ${invScoreCount}`; }
         function fireInvadersLaser() {
+            if(!invRunning) return;
             if(invAmmo <= 0) {
                 clearInterval(invInterval); invRunning = false;
                 triggerGlobalQuiz(() => { invAmmo = 10; updateInvadersUI(); startInvaders(); }); return;
             }
-            if(!invLaser) { invLaser = {x: invShipX + 12, y: 170}; invAmmo--; updateInvadersUI(); }
+            if(!invLaser) { invLaser = {x: invShipX + 12, y: 150}; invAmmo--; updateInvadersUI(); }
         }
         function updateInvaders() {
             if(invLaser) {
@@ -670,45 +684,55 @@
                 });
                 if(invLaser && invLaser.y < 0) invLaser = null;
             }
-            if(invAliens.filter(a => a.alive).length === 0) { alert("🌌 ¡Nivel completado con éxito!"); clearInterval(invInterval); invRunning = false; initInvaders(); return; }
+            if(invAliens.filter(a => a.alive).length === 0) { alert("🌌 ¡Felicidades!"); clearInterval(invInterval); invRunning = false; initInvaders(); return; }
             drawInvaders();
         }
         function drawInvaders() {
             invCtx.fillStyle = '#fff0f5'; invCtx.fillRect(0, 0, invCanvas.width, invCanvas.height);
-            invCtx.fillStyle = '#ff69b4'; invCtx.fillRect(invShipX, 180, 25, 12);
+            invCtx.fillStyle = '#ff69b4'; invCtx.fillRect(invShipX, 160, 25, 12);
             if(invLaser) { invCtx.fillStyle = '#ff1493'; invCtx.fillRect(invLaser.x, invLaser.y, 4, 8); }
             invCtx.fillStyle = '#db7093'; invAliens.forEach(al => { if(al.alive) invCtx.fillRect(al.x, al.y, 20, 12); });
         }
 
-        // --- JUEGO 6: METEOROS ---
+        // --- METEOROS ---
         const metCanvas = document.getElementById('meteorosCanvas'); const metCtx = metCanvas.getContext('2d');
         let metTargetWord = "", metCurrentIndex = 0, metMeteorY, metInterval, metRunning = false;
         function initMeteoros() {
+            if(vocabulary.length === 0) return;
             const pair = vocabulary[Math.floor(Math.random() * vocabulary.length)];
             metTargetWord = pair.sv.toLowerCase().trim(); metCurrentIndex = 0; metMeteorY = 10;
             document.getElementById('met-clue').innerText = pair.es.toUpperCase();
+            document.getElementById('met-current-char').innerText = "-";
             drawMeteoros();
         }
-        function startMeteoros() {
-            if(metRunning) return; metRunning = true;
-            document.getElementById('met-hidden-input').value = ""; document.getElementById('met-hidden-input').focus();
-            document.getElementById('met-hidden-input').oninput = function(e) {
-                let char = e.target.value.slice(-1).toLowerCase();
-                if(char === metTargetWord[metCurrentIndex]) { metCurrentIndex++; metMeteorY = 10; if(metCurrentIndex >= metTargetWord.length) { alert("✨ ¡Estrella atrapada con éxito!"); initMeteoros(); } }
-                e.target.value = "";
-            };
-            metInterval = setInterval(() => {
-                metMeteorY += 3;
-                if(metMeteorY > metCanvas.height - 10) { clearInterval(metInterval); metRunning = false; alert(`🌸 ¡Casi! La palabra era: ${metTargetWord}`); initMeteoros(); }
-                drawMeteoros();
-            }, 150);
+        function startMeteoros() { if(!metRunning) { metRunning = true; metInterval = setInterval(updateMeteoros, 200); } }
+        function handleMeteorKey(letter) {
+            document.getElementById('met-current-char').innerText = letter.toUpperCase();
+            if(!metRunning) return;
+            if(letter === metTargetWord[metCurrentIndex]) { 
+                metCurrentIndex++; 
+                metMeteorY = 10; 
+                if(metCurrentIndex >= metTargetWord.length) { clearInterval(metInterval); metRunning = false; alert("✨ ¡Meteorito destruido con éxito!"); initMeteoros(); } 
+            }
+        }
+        function updateMeteoros() {
+            metMeteorY += 5;
+            if(metMeteorY > metCanvas.height - 15) { clearInterval(metInterval); metRunning = false; alert(`🌸 ¡Impacto! La palabra era: ${metTargetWord.toUpperCase()}`); initMeteoros(); }
+            drawMeteoros();
         }
         function drawMeteoros() {
             metCtx.fillStyle = '#fff0f5'; metCtx.fillRect(0, 0, metCanvas.width, metCanvas.height);
             let neededLetter = metTargetWord[metCurrentIndex] || "";
-            metCtx.fillStyle = '#ffb6c1'; metCtx.beginPath(); metCtx.arc(140, metMeteorY, 16, 0, Math.PI*2); metCtx.fill();
-            metCtx.fillStyle = '#ff69b4'; metCtx.font = 'bold 14px Courier New'; metCtx.fillText(neededLetter.toUpperCase(), 135, metMeteorY + 5);
-            metCtx.fillStyle = '#db7093'; metCtx.fillText("Progreso: " + metTargetWord.substring(0, metCurrentIndex), 10, metCanvas.height - 10);
+            metCtx.fillStyle = '#ffb6c1'; metCtx.beginPath(); metCtx.arc(140, metMeteorY, 14, 0, Math.PI*2); metCtx.fill();
+            metCtx.fillStyle = '#ff69b4'; metCtx.font = 'bold 13px Courier New'; metCtx.fillText(neededLetter.toUpperCase(), 135, metMeteorY + 4);
+            metCtx.fillStyle = '#db7093'; metCtx.fillText("Progreso: " + metTargetWord.substring(0, metCurrentIndex).toUpperCase(), 10, metCanvas.height - 8);
+        }
+
+        function saveVocabulary() {
+            const text = document.getElementById('vocab-input').value;
+            parseVocabText(text);
+            localStorage.setItem('retro_vocab', text);
+            alert("💖 ¡Lista SFI guardada en el sistema!");
         }
     </script>
 </body>
