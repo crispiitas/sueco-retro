@@ -172,6 +172,22 @@
         #system-clock { float: right; background: #ffe4e1; border-top: 2px solid #db7093; border-left: 2px solid #db7093; border-right: 2px solid #fff; border-bottom: 2px solid #fff; height: 100%; padding: 5px 12px; font-size: 11px; font-weight: bold; display: flex; align-items: center; color: #db7093; }
     </style>
 </head>
+<!-- Vincular el Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#ffd1dc">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- Registrar el Service Worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('¡Service Worker registrado con éxito!', reg))
+                    .catch(err => console.log('Error al registrar el Service Worker', err));
+            });
+        }
+    </script>
 <body>
 
     <div id="desktop">

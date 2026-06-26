@@ -1,0 +1,17 @@
+{
+  "name": "RetroSvenska OS Girly Edition",
+  "short_name": "RetroSvenska",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffb6c1",
+  "theme_color": "#ffd1dc",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "https://img.icons8.com/fluent/512/pink-heart.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
