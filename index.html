@@ -27,7 +27,7 @@
             background-color: #ffb6c1; /* Fondo Rosa Pastel */
             font-family: 'Courier New', Courier, monospace;
             font-size: 13px;
-            color: #4a0e17; /* Texto marrón/burgundy retro */
+            color: #4a0e17; /* Texto retro */
             overflow: hidden;
         }
 
@@ -77,7 +77,7 @@
 
         .window {
             position: absolute;
-            background: #ffe4e1; /* Rosa empolvado para el cuerpo */
+            background: #ffe4e1; /* Rosa empolvado */
             border-top: 2px solid #fff;
             border-left: 2px solid #fff;
             border-right: 2px solid #db7093;
@@ -133,6 +133,7 @@
 
         /* Dimensiones de Ventanas */
         #window-disquetera { width: 92%; max-width: 340px; left: 4%; top: 5%; }
+        #window-flashcards { width: 92%; max-width: 340px; left: 4%; top: 8%; }
         #window-snake { width: 94%; max-width: 350px; left: 3%; top: 2%; }
         #window-ahorcado { width: 94%; max-width: 340px; left: 3%; top: 5%; }
         #window-memory { width: 94%; max-width: 340px; left: 3%; top: 4%; }
@@ -146,6 +147,14 @@
         .mode-btn { display: table-cell; text-align: center; width: 33.33%; padding: 1px; }
         .mode-btn button { width: 100%; font-size: 11px; }
         .mode-btn.active button { background: #ffb6c1; border-top: 2px solid #db7093; border-left: 2px solid #db7093; border-right: 2px solid #fff; border-bottom: 2px solid #fff; color: #fff; text-shadow: 1px 1px #db7093; }
+
+        /* Estilos Flashcards */
+        .flashcard-box { width: 260px; height: 140px; margin: 15px auto; perspective: 1000px; cursor: pointer; }
+        .flashcard-inner { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.5s; text-align: center; }
+        .flashcard-box.flipped .flashcard-inner { transform: rotateY(180deg); }
+        .flashcard-front, .flashcard-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; border-radius: 4px; box-shadow: inset 0 0 10px rgba(255,105,180,0.1); border: 2px dashed #ff69b4; }
+        .flashcard-front { background: #fff; color: #ff69b4; }
+        .flashcard-back { background: #fff0f5; color: #db7093; transform: rotateY(180deg); }
 
         .game-canvas-container { background: #fff0f5; width: 280px; height: 200px; margin: 0 auto; border: 2px solid #db7093; position: relative; }
         canvas { display: block; background: #fff0f5; }
@@ -169,10 +178,14 @@
 <body>
 
     <div id="desktop">
-        <!-- ICONOS CON EMOJIS CUTE -->
+        <!-- ICONOS -->
         <div class="desktop-icon" onclick="openWindow('disquetera')">
             <span class="icon-emoji">💾</span>
             Disquetera<br><span class="shortcut-badge">Teclado: 0</span>
+        </div>
+        <div class="desktop-icon" onclick="openWindow('flashcards')">
+            <span class="icon-emoji">📔</span>
+            Flashcards<br><span class="shortcut-badge">Teclado: 7</span>
         </div>
         <div class="desktop-icon" onclick="openWindow('snake')">
             <span class="icon-emoji">🌸</span>
@@ -212,6 +225,35 @@
                         <div id="mode-mix" class="mode-btn"><button class="win95-btn" onclick="setMode('mix')">MIXTO</button></div>
                     </div>
                     <button class="win95-btn" style="width:100%; color:#db7093; background:#fff;" onclick="saveVocabulary()">💝 Guardar Mi Lista</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- VENTANA: FLASHCARDS -->
+        <div id="window-flashcards" class="window">
+            <div class="window-inner">
+                <div class="title-bar"><div class="title-bar-text">📔 Flashcards 95 Estudio</div><div class="title-bar-controls"><button onclick="closeWindow('flashcards')">X</button></div></div>
+                <div class="window-body" style="text-align: center;">
+                    <p id="flashcard-counter" style="margin:0; font-size:11px; font-weight:bold; color:#db7093;">Tarjeta 1 de 1</p>
+                    
+                    <div class="flashcard-box" id="fcard-box" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <span style="font-size:11px; color:#db7093; margin-bottom:10px;">¿Cómo se dice? ✨</span>
+                                <strong id="fcard-front-text" style="font-size:18px;">Palabra</strong>
+                            </div>
+                            <div class="flashcard-back">
+                                <span style="font-size:11px; color:#ff69b4; margin-bottom:10px;">Respuesta 🌸</span>
+                                <strong id="fcard-back-text" style="font-size:18px;">Traducción</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; justify-content: space-between; gap: 10px;">
+                        <button class="win95-btn" style="flex:1;" onclick="prevFlashcard()">◀ Atrás</button>
+                        <button class="win95-btn" style="flex:1;" onclick="nextFlashcard()">Siguiente ▶</button>
+                    </div>
+                    <p style="font-size:10px; color:#ff69b4; margin: 6px 0 0 0;">✨ Toca la tarjeta para ver el reverso</p>
                 </div>
             </div>
         </div>
@@ -327,6 +369,7 @@
         let currentQuizPair = null;
         let currentQuizDirection = 'es-sv';
         let onQuizSuccessCallback = null;
+        let currentFlashcardIndex = 0;
 
         // --- RECEPTOR GLOBAL DE TECLADO ---
         window.addEventListener('keydown', function(e) {
@@ -345,6 +388,7 @@
             if (e.key === '4') toggleWindowKeyboard('buscaminas');
             if (e.key === '5') toggleWindowKeyboard('invaders');
             if (e.key === '6') toggleWindowKeyboard('meteoros');
+            if (e.key === '7') toggleWindowKeyboard('flashcards');
 
             if (e.key === 'Enter') {
                 if (document.getElementById('window-snake').style.display === 'block') startGame();
@@ -362,6 +406,11 @@
                 if (e.key === 'ArrowLeft') moveInvadersShip(-15);
                 if (e.key === 'ArrowRight') moveInvadersShip(15);
                 if (e.key === ' ') { e.preventDefault(); fireInvadersLaser(); }
+            }
+            if (document.getElementById('window-flashcards').style.display === 'block') {
+                if (e.key === 'ArrowRight') nextFlashcard();
+                if (e.key === 'ArrowLeft') prevFlashcard();
+                if (e.key === ' ') { e.preventDefault(); document.getElementById('fcard-box').classList.toggle('flipped'); }
             }
         });
 
@@ -394,6 +443,7 @@
             document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
             document.getElementById('mode-' + mode).classList.add('active');
             localStorage.setItem('retro_mode', mode);
+            if(document.getElementById('window-flashcards').style.display === 'block') updateFlashcard();
         }
 
         function parseVocabText(text) {
@@ -405,7 +455,10 @@
                     loaded.push({ es: parts[0].trim().toLowerCase(), sv: parts[1].trim().toLowerCase() });
                 }
             });
-            if(loaded.length > 0) vocabulary = loaded;
+            if(loaded.length > 0) {
+                vocabulary = loaded;
+                currentFlashcardIndex = 0;
+            }
         }
 
         function saveVocabulary() {
@@ -420,6 +473,7 @@
                 document.querySelectorAll('.window').forEach(w => { if(w.id !== 'window-quiz') w.style.display = 'none'; });
             }
             document.getElementById('window-' + id).style.display = 'block';
+            if (id === 'flashcards') updateFlashcard();
             if (id === 'snake') initSnakeGame();
             if (id === 'ahorcado') initHangman();
             if (id === 'memory') initMemory();
@@ -433,6 +487,36 @@
             if(id === 'snake') { clearInterval(gameInterval); gameRunning = false; }
             if(id === 'invaders') { clearInterval(invInterval); invRunning = false; }
             if(id === 'meteoros') { clearInterval(metInterval); metRunning = false; }
+        }
+
+        // --- SISTEMA DE FLASHCARDS ---
+        function updateFlashcard() {
+            if(vocabulary.length === 0) return;
+            document.getElementById('fcard-box').classList.remove('flipped');
+            document.getElementById('flashcard-counter').innerText = `Tarjeta ${currentFlashcardIndex + 1} de ${vocabulary.length}`;
+            
+            let pair = vocabulary[currentFlashcardIndex];
+            
+            // Ajustar según la dirección configurada en la disquetera
+            if (currentMode === 'sv-es') {
+                document.getElementById('fcard-front-text').innerText = pair.sv.toUpperCase();
+                document.getElementById('fcard-back-text').innerText = pair.es.toLowerCase();
+            } else {
+                document.getElementById('fcard-front-text').innerText = pair.es.toUpperCase();
+                document.getElementById('fcard-back-text').innerText = pair.sv.toLowerCase();
+            }
+        }
+
+        function nextFlashcard() {
+            if(vocabulary.length === 0) return;
+            currentFlashcardIndex = (currentFlashcardIndex + 1) % vocabulary.length;
+            updateFlashcard();
+        }
+
+        function prevFlashcard() {
+            if(vocabulary.length === 0) return;
+            currentFlashcardIndex = (currentFlashcardIndex - 1 + vocabulary.length) % vocabulary.length;
+            updateFlashcard();
         }
 
         function triggerGlobalQuiz(onSuccess) {
